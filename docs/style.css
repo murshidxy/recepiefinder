@@ -50,12 +50,13 @@ input:active{
 .suggestion{
     width: 100%;
     max-height: 400px;
-    border: 1px solid rgba(183, 168, 168, 0.395);
+
     position: absolute;
     display: none;
     overflow-y: scroll;
     padding: 10px;
     border-radius: 10px;
+    top: 60px;
 }
 .suggestion-items {
     width: 100%;
@@ -72,20 +73,35 @@ input:active{
 .suggestion-items > img {
     width: 50px;
 }
+.lang-pref-container{
+    display: flex;
+    padding: 10px;
+    justify-content: end;
+    padding-right: 10px;
+  
+   
+}
+.lang-pref-container > button{
+    background: none;
+    border: none;
+    color: white;
+    padding: 0 10px;
+    background-color: gray;
+    
+}
 /* styling selected recepie container and its child */
-.recepie-container{
+.recipe-container{
     padding: 8px 48px;
     display: none;
     flex-direction: column;
     align-items: center;
-    border: 1px solid rgba(115, 107, 107, 0.328);
     margin-top: 20px;
     gap: 20px;
     border-radius: 10px;
     padding-bottom: 30px;
 
 }
-.recepie-container > * {
+.recipe-container > * {
     padding: 10px;
     display: flex;
     flex-direction: column;
@@ -96,7 +112,7 @@ h1{
     text-align: center;
     border: none;
 }
-.recepie-container > img{
+.recipe-container > img{
     width: 300px;
     
 }
@@ -119,4 +135,11 @@ h1{
    border: none;
    border-radius: 10px;
    padding: 0;
+}
+
+@media (max-width:720px ){
+.container{
+    width: 95%;
+    margin: auto;
+}
 }

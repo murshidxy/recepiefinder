@@ -1,7 +1,8 @@
 const theme = document.getElementById('theme')
 const input = document.getElementById('input')
 const suggestion = document.getElementById('suggestion')
-const recepie = document.getElementById('recepie')
+const recipe = document.getElementById('recipe')
+
 
 // loading user preference for them from local storage , default 'white'
 let intialTheme = localStorage.getItem('theme') ?? 'white'
@@ -9,10 +10,11 @@ let intialTheme = localStorage.getItem('theme') ?? 'white'
 // fucntion to apply thme
 const handleTheme = (themeColor) => { 
     localStorage.setItem('theme',themeColor) // storing premerence permenantly
-    theme.textContent = themeColor == 'white' ? 'Dark' : 'Light'
-    document.body.style.backgroundColor = themeColor
+    theme.textContent = themeColor == 'white' ? '🌙' : '☀️'
+    document.body.style.backgroundColor = themeColor == 'white' ? 'white' : '#0D0907'
     document.body.style.color = themeColor == 'white' ? 'black' : 'white'
-    suggestion.style.backgroundColor = themeColor
+    suggestion.style.backgroundColor = themeColor == 'white' ? 'whitesmoke' : '#171717'
+    recipe.style.backgroundColor = themeColor == 'white' ? 'whitesmoke' : '#171717'
     input.style.color = themeColor =='white' ? 'black' :'white'
 }
 
@@ -29,7 +31,7 @@ const notFound = (parentElem) => {
 //function to display selcted meal
 const showIndividualRecepie = (meal) => { 
    suggestion.style.display = 'none'
-   recepie.innerHTML = ''
+   recipe.innerHTML = ''
   
    //filtering ingredients and its value from meal object 
    const ingredients = Object.keys(meal).filter(key => key.startsWith('strIngredient') && meal[key]).map(key => meal[key])
@@ -69,14 +71,14 @@ const showIndividualRecepie = (meal) => {
    incgredientDescDiv.appendChild(ingredientDesc)
 
    //Append elements to DOM
-   recepie.appendChild(title) 
-   recepie.appendChild(mealImage) 
-   recepie.appendChild(ingredientConatinerDiv)
-   recepie.appendChild(incgredientDescDiv)
-   recepie.appendChild(videoIFrame)
+   recipe.appendChild(title) 
+   recipe.appendChild(mealImage) 
+   recipe.appendChild(ingredientConatinerDiv)
+   recipe.appendChild(incgredientDescDiv)
+   recipe.appendChild(videoIFrame)
    
-   //Show recepie details
-   recepie.style.display = 'flex'
+   //Show recipe details
+   recipe.style.display = 'flex'
 }
 
 //Functions to update search suggestion
@@ -99,7 +101,16 @@ const updateSuggestionDom = (list) => {
         itemDiv.appendChild(itemImg)
         itemDiv.appendChild(innerDiv)
         itemDiv.classList.add('suggestion-items')
+         itemDiv.onkeydown = (e) => {
+            if(e.key == "Enter"){
+     showIndividualRecepie(item)
+            }
+     
+          }
         itemDiv.onclick = () => showIndividualRecepie(item)
+         
+        itemDiv.setAttribute("tabindex",0)
+      
         suggestion.appendChild(itemDiv)
 
     })
@@ -120,6 +131,7 @@ function debounce(func, delay) {
 
 //Function to fetch recepies from theMealDB
 const fetchRecepie = async(text) => {
+    console.log(text)
     const result = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`).then(res => res.json())
     
     if(result?.meals){
@@ -142,6 +154,14 @@ document.addEventListener('DOMContentLoaded', () => {
     theme.addEventListener('click', () => { 
        intialTheme = intialTheme == 'white' ? 'black' : 'white'
        handleTheme(intialTheme) // updating the theme
+    })
+    theme.addEventListener('keydown', (e) => { 
+        if(e.key == "Enter"){
+   intialTheme = intialTheme == 'white' ? 'black' : 'white'
+       handleTheme(intialTheme) // updating the theme   
+        }
+
+    
     })
     
     //Fetch recepies when user types in the input field

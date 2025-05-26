@@ -10,22 +10,23 @@
     <main class="container">
         <!-- Header section with title theme togggle -->
         <header class="title-container">
-            <h1>Recepie<span style="color: rgb(141, 106, 16);">Finder</span></h1>
-            <div id="theme" style="cursor: pointer;">
-                theme
+            <h1>Recipe<span style="color: rgb(141, 106, 16);" aria-label="Recipe Finder" role="heading" aria-level="1">Finder</span></h1>
+            <div id="theme" style="cursor: pointer;" role="button" aria-label="Toggle theme - ligh or dark" tabindex="0">
+               
             </div>
         </header>
         <!-- Search input and suggestion dropdown -->
         <div class="search-container">
-            <input type="text" name=""  id="input" autocomplete="off">
-            <div class="suggestion" id="suggestion">
+            <input type="text" name=""  id="input" autocomplete="off" placeholder="Search Recipes">
+            <div class="suggestion" id="suggestion" role="listbox" aria-label="Recipe suggestion">
 
             </div>
         </div>
         <!-- Container to display selected recepie details -->
-        <div class="recepie-container" id="recepie">
+      
+        <section class="recipe-container" id="recipe" aria-live="polite" aria-label="Selected recipe details will appear here">
 
-        </div>
+        </section>
     </main>
     <!-- Link to Javascript File -->
     <script src="script.js"></script>

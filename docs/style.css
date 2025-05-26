@@ -73,22 +73,7 @@ input:active{
 .suggestion-items > img {
     width: 50px;
 }
-.lang-pref-container{
-    display: flex;
-    padding: 10px;
-    justify-content: end;
-    padding-right: 10px;
-  
-   
-}
-.lang-pref-container > button{
-    background: none;
-    border: none;
-    color: white;
-    padding: 0 10px;
-    background-color: gray;
-    
-}
+
 /* styling selected recepie container and its child */
 .recipe-container{
     padding: 8px 48px;
@@ -141,5 +126,10 @@ h1{
 .container{
     width: 95%;
     margin: auto;
+}
+    .ingredient{
+   
+  width: 100%;
+
 }
 }

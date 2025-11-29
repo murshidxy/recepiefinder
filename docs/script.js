@@ -5,17 +5,17 @@ const recipe = document.getElementById('recipe')
 
 
 // loading user preference for them from local storage , default 'white'
-let intialTheme = localStorage.getItem('theme') ?? 'white'
+let intialTheme = localStorage.getItem('theme') ?? false
+
 
 // fucntion to apply thme
 const handleTheme = (themeColor) => { 
     localStorage.setItem('theme',themeColor) // storing premerence permenantly
-    theme.textContent = themeColor == 'white' ? '🌙' : '☀️'
-    document.body.style.backgroundColor = themeColor == 'white' ? 'white' : '#0D0907'
-    document.body.style.color = themeColor == 'white' ? 'black' : 'white'
-    suggestion.style.backgroundColor = themeColor == 'white' ? 'whitesmoke' : '#171717'
-    recipe.style.backgroundColor = themeColor == 'white' ? 'whitesmoke' : '#171717'
-    input.style.color = themeColor =='white' ? 'black' :'white'
+    theme.textContent = !themeColor ? '🌙' : '☀️'
+    document.documentElement.style.setProperty('--body-color', `${themeColor ? "#0D0907" : "white"}`)
+    document.documentElement.style.setProperty('--text-color', `${themeColor ? "white" : "black"}`)
+    document.documentElement.style.setProperty('--primary-color', `${themeColor ? "#171717" : "whitesmoke"}`)
+    document.documentElement.style.setProperty('--secondary-color', `${themeColor ? "rgb(56, 55, 55)" : "rgba(215, 201, 201, 1)"}`)
 }
 
 //Displaying "Not Found" if There is no suggestions are available
@@ -30,10 +30,11 @@ const notFound = (parentElem) => {
 
 //function to display selcted meal
 const showIndividualRecepie = (meal) => { 
-    console.log(meal)
+    
    suggestion.style.display = 'none'
    recipe.innerHTML = ''
-  
+    recipe.classList.remove('fadein')
+    void recipe.offsetWidth
    //filtering ingredients and its value from meal object 
    const ingredients = Object.keys(meal).filter(key => key.startsWith('strIngredient') && meal[key]).map(key => meal[key])
    const ingredientsValue = Object.keys(meal).filter(key => key.startsWith('strMeasure') && meal[key]).map(key => meal[key])
@@ -87,7 +88,7 @@ const showIndividualRecepie = (meal) => {
    recipe.appendChild(itemContainerDiv)
    recipe.appendChild(incgredientDescDiv)
    recipe.appendChild(videoIFrame)
-   
+   recipe.classList.add('fadein')
    //Show recipe details
    recipe.style.display = 'grid'
 }
@@ -144,13 +145,14 @@ function debounce(func, delay) {
 const fetchRecepie = async(text) => {
     console.log(text)
     const result = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${text}`).then(res => res.json())
-    
+
     if(result?.meals){
         //Show only the first 10 results
         updateSuggestionDom(result?.meals?.length  < 10 ? result?.meals : result?.meals?.slice(0,10) )
     }else{
         notFound(suggestion)
     }
+   
    
 } 
 
@@ -163,12 +165,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
     //Toggle theme when clicking the button
     theme.addEventListener('click', () => { 
-       intialTheme = intialTheme == 'white' ? 'black' : 'white'
+       intialTheme = intialTheme ? false : true
        handleTheme(intialTheme) // updating the theme
     })
     theme.addEventListener('keydown', (e) => { 
         if(e.key == "Enter"){
-   intialTheme = intialTheme == 'white' ? 'black' : 'white'
+       intialTheme = intialTheme ? false : true
        handleTheme(intialTheme) // updating the theme   
         }
 

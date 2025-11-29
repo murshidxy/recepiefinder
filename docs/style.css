@@ -1,7 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 /* removing default pading and margin */
 
-
+:root {
+    --body-color : #0D0907;
+    --primary-color: #171717;
+    --secondary-color:  rgb(56, 55, 55);
+    --text-color:white
+}
 *{
     padding: 0;
     margin: 0;
@@ -9,6 +14,8 @@
 }
 body{
     font-family: 'Roboto',sans-serif;
+    background-color: var(--body-color);
+    color: var(--text-color);
 }
 /* styling app container */
 .container{
@@ -25,6 +32,7 @@ body{
     justify-content:flex-end;
     gap: 6px;
     margin-bottom: 10px;
+
 }
 .title-container > .logo{
     flex-grow: 1;
@@ -37,6 +45,7 @@ body{
    position: relative;
    border: 1px solid rgba(183, 168, 168, 0.395);
    border-radius: 10px;
+
   
 }
 .search-container > input {
@@ -49,6 +58,7 @@ body{
     border: none;
     border-radius: 10px;
     width: 100%;
+    color: var(--text-color);
  
 }
 input:active{
@@ -57,13 +67,14 @@ input:active{
 .suggestion{
     width: 100%;
     max-height: 400px;
-
+    background-color: var(--primary-color);
     position: absolute;
     display: none;
     overflow-y: scroll;
     padding: 10px;
     border-radius: 10px;
     top: 60px;
+    z-index: 10;
 }
 .suggestion-items {
     width: 100%;
@@ -100,13 +111,18 @@ input:active{
 .recipe-container{
     padding: 8px 48px;
     display: none;
-  
+    background-color: var(--primary-color);
     grid-template-columns: repeat(4,1fr);
     margin-top: 20px;
     gap: 20px;
     border-radius: 10px;
     padding-bottom: 30px;
+    
+ 
 
+}
+.fadein{
+animation: fadeIn .8s ease-in;
 }
 .recipe-container > * {
     padding: 10px;
@@ -128,12 +144,12 @@ input:active{
 .recipe-container > .desc{
     grid-column-start: 3;
     grid-column-end: 5;
-    text-align: center;
-    color: rgba(255, 255, 255, 0.663);
+    
+  
 }
 .recipe-container > .desc > p:first-child{
     font-size: 30px;
-    color: white;
+
 
 }
 h1{
@@ -161,7 +177,7 @@ h1{
     padding: 10px;
     border-radius: 10px;
     gap: 4px;
-    background-color: rgb(56, 55, 55);
+    background-color: var(--secondary-color);
 }
 .ingredient > img{
     aspect-ratio: 1/1;
@@ -219,3 +235,14 @@ h1{
 
 }
 }
+@keyframes fadeIn{
+    0%{
+     transform: translateY(20px);
+     opacity: 50%;
+    }
+    100%{
+        transform: translateY(0px);
+    }
+    
+}
+

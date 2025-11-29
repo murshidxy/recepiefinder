@@ -10,20 +10,25 @@
     <main class="container">
         <!-- Header section with title theme togggle -->
         <header class="title-container">
+            <div class="logo">
             <h1>Recipe<span style="color: rgb(141, 106, 16);" aria-label="Recipe Finder" role="heading" aria-level="1">Finder</span></h1>
-            <div id="theme" style="cursor: pointer;" role="button" aria-label="Toggle theme - ligh or dark" tabindex="0">
-               
             </div>
-        </header>
-        <!-- Search input and suggestion dropdown -->
-        <div class="search-container">
+
+              <div class="search-container">
             <input type="text" name=""  id="input" autocomplete="off" placeholder="Search Recipes">
             <div class="suggestion" id="suggestion" role="listbox" aria-label="Recipe suggestion">
 
             </div>
+                     
         </div>
-        <!-- Container to display selected recepie details -->
+
+                 <div id="theme" style="cursor: pointer;" role="button" aria-label="Toggle theme - ligh or dark" tabindex="0"></div> 
+            
+        </header>
+    
       
+        <!-- Container to display selected recepie details -->
+         
         <section class="recipe-container" id="recipe" aria-live="polite" aria-label="Selected recipe details will appear here">
 
         </section>

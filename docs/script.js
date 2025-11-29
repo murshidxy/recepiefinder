@@ -30,6 +30,7 @@ const notFound = (parentElem) => {
 
 //function to display selcted meal
 const showIndividualRecepie = (meal) => { 
+    console.log(meal)
    suggestion.style.display = 'none'
    recipe.innerHTML = ''
   
@@ -41,10 +42,14 @@ const showIndividualRecepie = (meal) => {
    let title = document.createElement('h1')
    let mealImage = document.createElement('img')
    let ingredientConatinerDiv = document.createElement('div')
+   let itemContainerDiv = document.createElement('div')
+   itemContainerDiv.classList.add("item")
    ingredientConatinerDiv.classList.add('ingredient-container')
    let descp = document.createElement('p')
+ 
    descp.textContent = "Description"
    let incgredientDescDiv = document.createElement('div')
+   incgredientDescDiv.classList.add("desc")
    let ingredientDesc = document.createElement('p')
    let videoIFrame = document.createElement('iframe')
    videoIFrame.classList.add('video')
@@ -53,10 +58,15 @@ const showIndividualRecepie = (meal) => {
    ingredients.forEach((item,i) => {
     let ingredientDiv = document.createElement('div')
     ingredientDiv.classList.add('ingredient')
+    let ingredientImg = document.createElement('img')
+    ingredientImg.src = `https://www.themealdb.com/images/ingredients/${item.split(" ").join("_").toLowerCase()}.png`
+
+    ingredientImg.alt = `${item} .png`
     let ingredientName = document.createElement('p')
     let ingredientMeasure = document.createElement('p')
     ingredientName.textContent = item
     ingredientMeasure.textContent = ingredientsValue[i]
+    ingredientDiv.appendChild(ingredientImg)
     ingredientDiv.appendChild(ingredientName)
     ingredientDiv.appendChild(ingredientMeasure)
     ingredientConatinerDiv.appendChild(ingredientDiv)
@@ -71,14 +81,15 @@ const showIndividualRecepie = (meal) => {
    incgredientDescDiv.appendChild(ingredientDesc)
 
    //Append elements to DOM
-   recipe.appendChild(title) 
-   recipe.appendChild(mealImage) 
-   recipe.appendChild(ingredientConatinerDiv)
+   itemContainerDiv.appendChild(title) 
+   itemContainerDiv.appendChild(mealImage) 
+   itemContainerDiv.appendChild(ingredientConatinerDiv)
+   recipe.appendChild(itemContainerDiv)
    recipe.appendChild(incgredientDescDiv)
    recipe.appendChild(videoIFrame)
    
    //Show recipe details
-   recipe.style.display = 'flex'
+   recipe.style.display = 'grid'
 }
 
 //Functions to update search suggestion

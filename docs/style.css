@@ -99,7 +99,7 @@ input:active{
 /* styling selected recepie container and its child */
 .recipe-container{
     padding: 8px 48px;
-    display: grid;
+    display: none;
   
     grid-template-columns: repeat(4,1fr);
     margin-top: 20px;
